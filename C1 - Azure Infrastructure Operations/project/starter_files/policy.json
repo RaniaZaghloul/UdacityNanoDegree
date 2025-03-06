@@ -1,0 +1,9 @@
+{
+      "if": {
+          "value": "[contains(string(field('tags')), '\"\"')]",
+          "equals": "false"
+      },
+      "then": {
+        "effect": "deny"
+      }
+}
