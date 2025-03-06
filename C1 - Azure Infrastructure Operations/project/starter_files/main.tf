@@ -1,9 +1,11 @@
 provider "azurerm" {
   features {}
+  subscription_id = "d63f8116-7a20-4117-80f3-6b57296b37a5"
 }
 
 resource "azurerm_resource_group" "main" {
   name     = "Azuredevops"
+  location = "West Europe"
 }
 resource "azurerm_public_ip" "ip" {
   name                = "NANOPUBLICIP"
@@ -37,42 +39,14 @@ resource "azurerm_network_interface" "main" {
     private_ip_address_allocation = "Dynamic"
   }
 }
-resource "azurerm_network_security_rule" "deny_all_inbound" {
-  count                       = var.enable_nsg && length(var.subnets) > 0 ? length(var.subnets) : 0
-  name                        = "DenyAllInbound"
-  priority                    = 4096
-  direction                   = "Inbound"
-  access                      = "Deny"
-  protocol                    = "*"
-  source_port_range           = "*"
-  destination_port_range      = "*"
-  source_address_prefix       = "*"
-  destination_address_prefix  = "*"
-  resource_group_name         = var.resource_group_name
-  network_security_group_name = azurerm_network_security_group.nsg.*.name[count.index]
-}
 
-resource "azurerm_network_security_rule" "deny_all_outbound" {
-  count                       = var.enable_nsg && length(var.subnets) > 0 ? length(var.subnets) : 0
-  name                        = "DenyAllOutbound"
-  priority                    = 4096
-  direction                   = "Outbound"
-  access                      = "Deny"
-  protocol                    = "*"
-  source_port_range           = "*"
-  destination_port_range      = "*"
-  source_address_prefix       = "*"
-  destination_address_prefix  = "*"
-  resource_group_name         = var.resource_group_name
-  network_security_group_name = azurerm_network_security_group.nsg.*.name[count.index]
-}
 resource "azurerm_linux_virtual_machine" "main" {
   name                            = "NANOVM-vm"
   resource_group_name             = azurerm_resource_group.main.name
   location                        = azurerm_resource_group.main.location
   size                            = "Standard_D2s_v3"
-  admin_username                  = var.username
-  admin_password                  = var.password
+  admin_username                  = "odl_user_274883"
+  admin_password                  = "Rania@2025"
   disable_password_authentication = false
   network_interface_ids = [
     azurerm_network_interface.main.id,
