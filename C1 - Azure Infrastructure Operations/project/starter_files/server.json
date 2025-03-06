@@ -1,8 +1,8 @@
 {
 	"variables": {
-		"client_id": "1380ea76-590a-4ba4-be44-9ea4e3fd3195",
-		"client_secret": "d9b2ef53-fdaf-4150-b54b-c00a60687929",
-		"subscription_id": "d63f8116-7a20-4117-80f3-6b57296b37a5"
+		"client_id": "your clientid",
+		"client_secret": "your client secret",
+		"subscription_id": "your subscription id"
 	},
 	"builders": [
 		{
